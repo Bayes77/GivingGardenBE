@@ -46,7 +46,7 @@ namespace GivingGardenBE.Endpoints
                 .Produces<User>(StatusCodes.Status200OK)
                 .Produces(StatusCodes.Status204NoContent);
 
-            group.MapDelete("/{id", async (IUserServices userService, int id) =>
+            group.MapDelete("/{id}", async (IUserServices userService, int id) =>
             {
                 var user = await userService.DeleteUserAsync(id);
                 return Results.NoContent();

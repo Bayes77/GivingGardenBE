@@ -4,18 +4,22 @@ using GivingGardenBE.Endpoints;
 using GivingGardenBE.Interfaces;
 using GivingGardenBE.Repositories;
 using GivingGardenBE.Services;
+using Microsoft.AspNetCore.Http.Json;
+using System.Text.Json.Serialization;
 
 var builder = WebApplication.CreateBuilder(args);
 
+AppContext.SetSwitch("Npgsql.EnableLegacyTimestampBehavior", true);
+
 // Add configuration to read from user secrets when in development
-if (builder.Environment.IsDevelopment())
+builder.Services.AddNpgsql<GivingGardenBEDbContext>(builder.Configuration["GivingGardenBEConnectionString"]);
+
+builder.Services.Configure<JsonOptions>(options =>
 {
-    builder.Configuration.AddUserSecrets<Program>();
-}
+    options.SerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles;
+});
 
-var connectionString = builder.Configuration.GetConnectionString("GivingGardenBEDbConnection");
-builder.Services.AddDbContext<GivingGardenBEDbContext>(options => options.UseNpgsql(connectionString));
-
+// Add services to the container.
 builder.Services.AddScoped<IOrganizationServices, OrganizationServices>();
 builder.Services.AddScoped<IOrganizationRepositroy, OrganizationRepository>();
 // builder.Services.AddScoped<ISubscriptionServices, SubscriptionServices>();

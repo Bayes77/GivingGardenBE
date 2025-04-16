@@ -8,5 +8,6 @@
         public DateTime Subscribed_at { get; set; }
         public string? PaymentType { get; set; } 
         public decimal PaymentAmount { get; set; }
+        public List<Organization>? Organizations { get; set; } = new List<Organization>();
     }
 }
