@@ -1,12 +1,12 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using GivingGardenBE.Interfaces;
-using GivingGardenBE.Models;
 using GivingGardenBE.Data;
+using GivingGardenBE.Models;
+using GivingGardenBE.Interfaces;
 
 
 namespace GivingGardenBE.Repositories
 {
-    public class OrganizationRepository
+    public class OrganizationRepository : IOrganizationRepositroy
     {
         private readonly GivingGardenBEDbContext _context;
         public OrganizationRepository(GivingGardenBEDbContext context)
