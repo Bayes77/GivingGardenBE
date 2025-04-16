@@ -44,7 +44,7 @@ namespace GivingGardenBE.Repositories
             await _context.SaveChangesAsync();
             return orgToDelete;
         }
-       /* public async Task<List<Subscription>> GetSubscriptionsByOrgId(int orgId)
+        public async Task<List<Subscription>> GetSubscriptionsByOrgId(int orgId)
         {
             return await _context.Subscriptions.Where(s => s.OrganizationId == orgId).ToListAsync();
         }
@@ -63,7 +63,7 @@ namespace GivingGardenBE.Repositories
             var subscriptions = await GetSubscriptionsByUserId(userId);
             var orgIds = subscriptions.Select(s => s.OrganizationId).Distinct();
             return await _context.Organizations.Where(o => orgIds.Contains(o.Id)).ToListAsync();
-        }*/
+        }
     }
 }
 

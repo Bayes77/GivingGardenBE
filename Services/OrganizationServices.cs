@@ -30,7 +30,7 @@ namespace GivingGardenBE.Services
         {
             return await _organizationRepository.DeleteOrganization(id);
         }
-       /* public async Task<List<Subscription>> GetSubscriptionsByOrgId(int orgId)
+        public async Task<List<Subscription>> GetSubscriptionsByOrgId(int orgId)
         {
             return await _organizationRepository.GetSubscriptionsByOrgId(orgId);
         }
@@ -45,6 +45,6 @@ namespace GivingGardenBE.Services
         public async Task<List<Organization>> GetOrganizationsByUserId(int userId)
         {
             return await _organizationRepository.GetOrganizationsByUserId(userId);
-        }*/
+        }
     }
 }
