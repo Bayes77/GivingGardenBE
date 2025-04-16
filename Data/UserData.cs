@@ -4,7 +4,7 @@ namespace GivingGardenBE.Data
 {
     public class UserData
     {
-        public static List<User> User = new()
+        public static List<User> Users = new()
         {
             new() {Id = 1, Name = "Casey Cunningham", Email = "CaseCunnTest@gmail.com", Image = "test.png",},
              new() {Id = 2, Name = "Noah Allen", Email = "NoAllenTest@gmail.com", Image = "test.png",},
