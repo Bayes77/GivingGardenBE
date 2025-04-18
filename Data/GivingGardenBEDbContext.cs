@@ -1,9 +1,18 @@
 ﻿using Microsoft.EntityFrameworkCore;    
+﻿using Microsoft.EntityFrameworkCore;    
 using GivingGardenBE.Models;
+using GivingGardenBE.Data;
+using GivingGardenBE.Data;
+using GivingGardenBE.Data;
 using GivingGardenBE.Data;
 
 
 
+=======
+﻿using Microsoft.EntityFrameworkCore;
+using GivingGardenBE.Models;
+using GivingGardenBE.Data;
+>>>>>>> main
 namespace GivingGardenBE.Data
 {
     public class GivingGardenBEDbContext : DbContext
@@ -16,6 +25,7 @@ namespace GivingGardenBE.Data
             : base(options)
         {
         }
+>>>>>>> main
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<User>().HasData(UserData.Users);
