@@ -16,6 +16,7 @@ namespace GivingGardenBE.Endpoints
                 return sub is not null ? Results.Ok(sub) : Results.NotFound();
             })
             .WithName("GetSubscriptionById")
+            .WithOpenApi()
             .Produces<Subscription>(StatusCodes.Status200OK)
             .Produces(StatusCodes.Status404NotFound);
 
@@ -26,6 +27,7 @@ namespace GivingGardenBE.Endpoints
                 return Results.Ok(subs);
             })
             .WithName("GetSubscriptionsByUserId")
+            .WithOpenApi()
             .Produces<List<Subscription>>(StatusCodes.Status200OK);
 
             // Create subscription
@@ -35,6 +37,7 @@ namespace GivingGardenBE.Endpoints
                 return created is not null ? Results.Created($"/api/subscription/{created.Id}", created) : Results.BadRequest();
             })
             .WithName("CreateSubscription")
+            .WithOpenApi()
             .Produces<Subscription>(StatusCodes.Status201Created)
             .Produces(StatusCodes.Status400BadRequest);
 
@@ -45,6 +48,7 @@ namespace GivingGardenBE.Endpoints
                 return deleted is not null ? Results.Ok(deleted) : Results.NotFound();
             })
             .WithName("DeleteSubscription")
+            .WithOpenApi()
             .Produces<Subscription>(StatusCodes.Status200OK)
             .Produces(StatusCodes.Status404NotFound);
         }
