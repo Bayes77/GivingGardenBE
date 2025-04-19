@@ -1,6 +1,7 @@
 ﻿using GivingGardenBE.Data;
 using GivingGardenBE.Interfaces;
 using GivingGardenBE.Models;
+using GivingGardenBE.Services;
 using Microsoft.EntityFrameworkCore;
 
 namespace GivingGardenBE.Repositories
@@ -13,50 +14,46 @@ namespace GivingGardenBE.Repositories
             _context = context;
         }
 
-        public async Task<PaymentTypes> AddPaymentTypeAsync(PaymentTypes paymentType)
+        public async Task<List<PaymentTypes>> GetAllPaymentTypes()
         {
-            var entityEntry = await _context.PaymentTypes.AddAsync(paymentType);
-            await _context.SaveChangesAsync(); // Ensure changes are saved to the database
-            return entityEntry.Entity; // Return the added PaymentTypes entity
+            return await _context.PaymentTypes.ToListAsync();
         }
 
-        public async Task<PaymentTypes> DeletePaymentTypeAsync(int id)
+        public async Task<PaymentTypes> CreatePaymentType(PaymentTypes paymentType)
+        {
+            _context.PaymentTypes.Add(paymentType);
+            await _context.SaveChangesAsync();
+            return paymentType;
+        }
+
+        public async Task<PaymentTypes> DeletePaymentType(int id)
         {
             var paymentType = await _context.PaymentTypes.FindAsync(id);
             if (paymentType == null)
             {
-                throw new Exception("Payment type not found");
+                return null;
             }
             _context.PaymentTypes.Remove(paymentType);
             await _context.SaveChangesAsync();
-            return paymentType; 
-
-
+            return paymentType;
         }
 
-        public async Task<List<PaymentTypes>> GetAllPaymentTypesAsync()
+        public async Task<PaymentTypes> GetPaymentTypeById(int id)
         {
-          return await _context.PaymentTypes.ToListAsync();
+            return await _context.PaymentTypes.FindAsync(id);
         }
 
-        public async Task<PaymentTypes> GetPaymentTypeByIdAsync(int id)
+        public async Task<PaymentTypes> UpdatePaymentType(int id, PaymentTypes paymentType)
         {
-           return await _context.PaymentTypes.FindAsync(id);
-        }
-
-        public Task<PaymentTypes> UpdatePaymentTypeAsync(int id, PaymentTypes paymentType)
-        {
-           var exsistingPaymentType = _context.PaymentTypes.Find(id);
+            var exsistingPaymentType = _context.PaymentTypes.Find(id);
             if (exsistingPaymentType == null)
             {
-                throw new Exception("Payment type not found");
+                return null;
             }
             exsistingPaymentType.PaymentTypeName = paymentType.PaymentTypeName;
-            _context.SaveChanges();
-            return Task.FromResult(exsistingPaymentType);
+            await _context.SaveChangesAsync();
+            return exsistingPaymentType;
         }
-      
-
     }
     
 

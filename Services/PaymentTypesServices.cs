@@ -10,29 +10,30 @@ namespace GivingGardenBE.Services
         {
             _paymentTypesRepository = paymentTypesRepository;
         }
-        public async Task<PaymentTypes> AddPaymentTypeAsync(PaymentTypes paymentType)
+
+        public async Task<PaymentTypes> CreatePaymentType(PaymentTypes paymentType)
         {
-                return await _paymentTypesRepository.AddPaymentTypeAsync(paymentType);
+           return await _paymentTypesRepository.CreatePaymentType(paymentType);
         }
 
-        public async Task<PaymentTypes> DeletePaymentTypeAsync(int id)
+        public async Task<PaymentTypes> DeletePaymentType(int id)
         {
-            return await _paymentTypesRepository.DeletePaymentTypeAsync(id);    
+            return await _paymentTypesRepository.DeletePaymentType(id);
         }
 
-        public async Task<List<PaymentTypes>> GetAllPaymentTypesAsync()
+        public async Task<List<PaymentTypes>> GetAllPaymentTypes()
         {
-           return await _paymentTypesRepository.GetAllPaymentTypesAsync();
+           return await _paymentTypesRepository.GetAllPaymentTypes();
         }
 
-        public async Task<PaymentTypes> GetPaymentTypeByIdAsync(int id)
+        public async Task<PaymentTypes> GetPaymentTypeById(int id)
         {
-            return await _paymentTypesRepository.GetPaymentTypeByIdAsync(id);
+            return await _paymentTypesRepository.GetPaymentTypeById(id);
         }
 
-        public async Task<PaymentTypes> UpdatePaymentTypeAsync(int id, PaymentTypes paymentType)
+        public async Task<PaymentTypes> UpdatePaymentType(int id, PaymentTypes paymentType)
         {
-            return await _paymentTypesRepository.UpdatePaymentTypeAsync(id, paymentType);
+          return await _paymentTypesRepository.UpdatePaymentType(id, paymentType);
         }
     }
 }

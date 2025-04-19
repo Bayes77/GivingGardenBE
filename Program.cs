@@ -27,6 +27,11 @@ builder.Services.AddScoped<IOrganizationRepositroy, OrganizationRepository>();
 builder.Services.AddScoped<IUserServices, UserServices>();
 builder.Services.AddScoped<IUserRepository, UserRepository>();
 
+builder.Services.AddScoped<IPaymentTypeServices, PaymentTypesRepository>();
+builder.Services.AddScoped<PaymentTypesRepository, PaymentTypesRepository>();
+builder.Services.AddScoped<ISubscriptionRepository, SubscriptionRepository>();
+builder.Services.AddScoped<ISubscriptionServices, SubscriptionServices>();
+
 // Add services to the container.
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
@@ -44,7 +49,8 @@ if (app.Environment.IsDevelopment())
 app.UseHttpsRedirection();
 
 app.MapOrganizationEndpoints();
-// app.MapSubscriptionEndpoints();
+ app.MapSubscriptionEndpoints();
 app.MapUserEndpoints();
+app.MapPaymentTypesEndpoints();
 
 app.Run();

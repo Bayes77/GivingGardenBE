@@ -31,6 +31,11 @@ namespace GivingGardenBE.Services
         {
             return await _subscriptionRepository.DeleteSubscription(id);
         }
+
+        public async Task<Subscription?> UpdateSubscription(int id, Subscription subscription)
+        {
+            return await _subscriptionRepository.UpdateSubscription(id,subscription);
+        }
     }
 }
 

@@ -42,6 +42,19 @@ namespace GivingGardenBE.Repositories
             await _context.SaveChangesAsync();
             return sub;
         }
+
+        public async Task<Subscription?> UpdateSubscription(int id, Subscription subscription)
+        {
+            var existingSubscription = await _context.Subscriptions.FindAsync(subscription.Id);
+            if (existingSubscription == null) return null;
+            existingSubscription.UserId = subscription.UserId;
+            existingSubscription.OrganizationId = subscription.OrganizationId;
+            existingSubscription.Subscribed_at = subscription.Subscribed_at;
+            existingSubscription.PaymentType = subscription.PaymentType;
+            existingSubscription.PaymentAmount = subscription.PaymentAmount;
+            await _context.SaveChangesAsync();
+            return existingSubscription;
+        }
     }
 }
 

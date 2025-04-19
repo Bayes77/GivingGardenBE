@@ -1,5 +1,6 @@
 ﻿using GivingGardenBE.Interfaces;
 using GivingGardenBE.Models;
+using System.Text.RegularExpressions;
 
 namespace GivingGardenBE.Endpoints
 {
@@ -10,7 +11,7 @@ namespace GivingGardenBE.Endpoints
             var group = routes.MapGroup("/api/subscription").WithTags(nameof(Subscription));
 
             // Get subscription by ID
-            group.MapGet("/{id}", async (int id, ISubscriptionServices service) =>
+            /*group.MapGet("/{id}", async (int id, ISubscriptionServices service) =>
             {
                 var sub = await service.GetSubscriptionById(id);
                 return sub is not null ? Results.Ok(sub) : Results.NotFound();
@@ -18,15 +19,16 @@ namespace GivingGardenBE.Endpoints
             .WithName("GetSubscriptionById")
             .WithOpenApi()
             .Produces<Subscription>(StatusCodes.Status200OK)
-            .Produces(StatusCodes.Status404NotFound);
+            .Produces(StatusCodes.Status404NotFound);*/
 
-            // Get subscriptions by User ID
-            group.MapGet("/user/{userId}", async (int userId, ISubscriptionServices service) =>
+            // Get subscriptions by User IDdotnet watch run
+
+            group.MapGet("/{userId}", async (int userId, ISubscriptionServices service) =>
             {
                 var subs = await service.GetSubscriptionsByUserId(userId);
                 return Results.Ok(subs);
             })
-            .WithName("GetSubscriptionsByUserId")
+            .WithName("GetSubscriptionsByUId")
             .WithOpenApi()
             .Produces<List<Subscription>>(StatusCodes.Status200OK);
 
@@ -51,7 +53,22 @@ namespace GivingGardenBE.Endpoints
             .WithOpenApi()
             .Produces<Subscription>(StatusCodes.Status200OK)
             .Produces(StatusCodes.Status404NotFound);
+
+            // Update subscription
+            group.MapPut("/{id}", async (int id, Subscription subscription, ISubscriptionServices subscriptionservice) =>
+            {
+                var existingSub = await subscriptionservice.UpdateSubscription(id,subscription);
+                return Results.Ok(existingSub);
+               
+            })
+            .WithName("UpdateSubscription")
+            .WithOpenApi()
+            .Produces<Subscription>(StatusCodes.Status200OK)
+            .Produces(StatusCodes.Status400BadRequest)
+            .Produces(StatusCodes.Status404NotFound);
         }
     }
+   
+    
 }
 

@@ -11,7 +11,7 @@ namespace GivingGardenBE.Endpoints
             // Get all payment types
             app.MapGet("/paymenttypes", async (IPaymentTypeServices paymentType) =>
             {
-                var paymentTypes = await paymentType.GetAllPaymentTypesAsync();
+                var paymentTypes = await paymentType.GetAllPaymentTypes();
                 return Results.Ok(paymentTypes);
             })
                 .WithName("GetAllPaymentTypes")
@@ -32,7 +32,7 @@ namespace GivingGardenBE.Endpoints
             // Create a new payment type
             app.MapPost("/paymenttypes", async (PaymentTypes paymentType, IPaymentTypeServices paymentTypeServices) =>
             {
-                var createdPaymentType = await paymentTypeServices.AddPaymentTypeAsync(paymentType);
+                var createdPaymentType = await paymentTypeServices.CreatePaymentType(paymentType);
                 return Results.Created($"/paymenttypes/{createdPaymentType.Id}", createdPaymentType);
             })
                 .WithName("CreatePaymentType")
@@ -43,7 +43,7 @@ namespace GivingGardenBE.Endpoints
             // Update an existing payment type
             app.MapPut("/paymenttypes/{id}", async (int id, PaymentTypes paymentType, IPaymentTypeServices paymentTypeServices) =>
             {
-                var updatedPaymentType = await paymentTypeServices.UpdatePaymentTypeAsync(id, paymentType);
+                var updatedPaymentType = await paymentTypeServices.UpdatePaymentType(id, paymentType);
                 return Results.Ok(updatedPaymentType);
             })
                 .WithName("UpdatePaymentType")
@@ -54,7 +54,7 @@ namespace GivingGardenBE.Endpoints
             // Delete a payment type
             app.MapDelete("/paymenttypes/{id}", async (int id, IPaymentTypeServices paymentTypeServices) =>
             {
-                var deletedPaymentType = await paymentTypeServices.DeletePaymentTypeAsync(id);
+                var deletedPaymentType = await paymentTypeServices.DeletePaymentType(id);
                 return Results.NoContent();
             })
                 .WithName("DeletePaymentType")

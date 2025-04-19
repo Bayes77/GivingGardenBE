@@ -7,6 +7,7 @@ namespace GivingGardenBE.Interfaces
         Task<List<Subscription>> GetSubscriptionsByUserId(int userId);
         Task<Subscription?> GetSubscriptionById(int id);
         Task<Subscription?> CreateSubscription(Subscription subscription);
+        Task<Subscription?> UpdateSubscription(int id, Subscription subscription);
         Task<Subscription?> DeleteSubscription(int id);
     }
 }
