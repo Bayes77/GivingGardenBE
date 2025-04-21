@@ -11,7 +11,7 @@ namespace GivingGardenBE.Endpoints
             var group = routes.MapGroup("/api/subscription").WithTags(nameof(Subscription));
 
             // Get subscription by ID
-            /*group.MapGet("/{id}", async (int id, ISubscriptionServices service) =>
+            group.MapGet("/{id}", async (int id, ISubscriptionServices service) =>
             {
                 var sub = await service.GetSubscriptionById(id);
                 return sub is not null ? Results.Ok(sub) : Results.NotFound();
@@ -19,7 +19,7 @@ namespace GivingGardenBE.Endpoints
             .WithName("GetSubscriptionById")
             .WithOpenApi()
             .Produces<Subscription>(StatusCodes.Status200OK)
-            .Produces(StatusCodes.Status404NotFound);*/
+            .Produces(StatusCodes.Status404NotFound);
 
             // Get subscriptions by User IDdotnet watch run
 

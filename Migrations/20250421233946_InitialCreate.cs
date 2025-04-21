@@ -153,11 +153,11 @@ namespace GivingGardenBE.Migrations
                 columns: new[] { "Id", "OrganizationId", "PaymentAmount", "PaymentType", "Subscribed_at", "UserId" },
                 values: new object[,]
                 {
-                    { 1, 101, 10.00m, "paypal", new DateTime(2025, 4, 17, 20, 40, 53, 767, DateTimeKind.Local).AddTicks(3153), 1 },
-                    { 2, 102, 10.00m, "debit", new DateTime(2025, 4, 17, 20, 40, 53, 770, DateTimeKind.Local).AddTicks(1146), 2 },
-                    { 3, 103, 10.00m, "mastercard", new DateTime(2025, 4, 17, 20, 40, 53, 770, DateTimeKind.Local).AddTicks(1178), 3 },
-                    { 4, 104, 10.00m, "cryptocurrency", new DateTime(2025, 4, 17, 20, 40, 53, 770, DateTimeKind.Local).AddTicks(1183), 4 },
-                    { 5, 105, 10.00m, "visa", new DateTime(2025, 4, 17, 20, 40, 53, 770, DateTimeKind.Local).AddTicks(1186), 5 }
+                    { 1, 101, 10.00m, "paypal", new DateTime(2025, 4, 21, 18, 39, 45, 282, DateTimeKind.Local).AddTicks(6835), 1 },
+                    { 2, 102, 10.00m, "debit", new DateTime(2025, 4, 21, 18, 39, 45, 285, DateTimeKind.Local).AddTicks(5542), 2 },
+                    { 3, 103, 10.00m, "mastercard", new DateTime(2025, 4, 21, 18, 39, 45, 285, DateTimeKind.Local).AddTicks(5579), 3 },
+                    { 4, 104, 10.00m, "cryptocurrency", new DateTime(2025, 4, 21, 18, 39, 45, 285, DateTimeKind.Local).AddTicks(5583), 4 },
+                    { 5, 105, 10.00m, "visa", new DateTime(2025, 4, 21, 18, 39, 45, 285, DateTimeKind.Local).AddTicks(5585), 5 }
                 });
 
             migrationBuilder.CreateIndex(

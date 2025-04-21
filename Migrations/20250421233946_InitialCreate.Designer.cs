@@ -12,7 +12,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace GivingGardenBE.Migrations
 {
     [DbContext(typeof(GivingGardenBEDbContext))]
-    [Migration("20250418014054_InitialCreate")]
+    [Migration("20250421233946_InitialCreate")]
     partial class InitialCreate
     {
         /// <inheritdoc />
@@ -181,7 +181,7 @@ namespace GivingGardenBE.Migrations
                             OrganizationId = 101,
                             PaymentAmount = 10.00m,
                             PaymentType = "paypal",
-                            Subscribed_at = new DateTime(2025, 4, 17, 20, 40, 53, 767, DateTimeKind.Local).AddTicks(3153),
+                            Subscribed_at = new DateTime(2025, 4, 21, 18, 39, 45, 282, DateTimeKind.Local).AddTicks(6835),
                             UserId = 1
                         },
                         new
@@ -190,7 +190,7 @@ namespace GivingGardenBE.Migrations
                             OrganizationId = 102,
                             PaymentAmount = 10.00m,
                             PaymentType = "debit",
-                            Subscribed_at = new DateTime(2025, 4, 17, 20, 40, 53, 770, DateTimeKind.Local).AddTicks(1146),
+                            Subscribed_at = new DateTime(2025, 4, 21, 18, 39, 45, 285, DateTimeKind.Local).AddTicks(5542),
                             UserId = 2
                         },
                         new
@@ -199,7 +199,7 @@ namespace GivingGardenBE.Migrations
                             OrganizationId = 103,
                             PaymentAmount = 10.00m,
                             PaymentType = "mastercard",
-                            Subscribed_at = new DateTime(2025, 4, 17, 20, 40, 53, 770, DateTimeKind.Local).AddTicks(1178),
+                            Subscribed_at = new DateTime(2025, 4, 21, 18, 39, 45, 285, DateTimeKind.Local).AddTicks(5579),
                             UserId = 3
                         },
                         new
@@ -208,7 +208,7 @@ namespace GivingGardenBE.Migrations
                             OrganizationId = 104,
                             PaymentAmount = 10.00m,
                             PaymentType = "cryptocurrency",
-                            Subscribed_at = new DateTime(2025, 4, 17, 20, 40, 53, 770, DateTimeKind.Local).AddTicks(1183),
+                            Subscribed_at = new DateTime(2025, 4, 21, 18, 39, 45, 285, DateTimeKind.Local).AddTicks(5583),
                             UserId = 4
                         },
                         new
@@ -217,7 +217,7 @@ namespace GivingGardenBE.Migrations
                             OrganizationId = 105,
                             PaymentAmount = 10.00m,
                             PaymentType = "visa",
-                            Subscribed_at = new DateTime(2025, 4, 17, 20, 40, 53, 770, DateTimeKind.Local).AddTicks(1186),
+                            Subscribed_at = new DateTime(2025, 4, 21, 18, 39, 45, 285, DateTimeKind.Local).AddTicks(5585),
                             UserId = 5
                         });
                 });

@@ -10,7 +10,7 @@ namespace GivingGardenBE.Endpoints
             var group = routes.MapGroup("/api/organization").WithTags(nameof(Organization));
 
             // Get all organizations
-            routes.MapGet("/", async (IOrganizationServices organizationServices) =>
+            group.MapGet("/", async (IOrganizationServices organizationServices) =>
             {
                 return await organizationServices.GetAllOrganizations();
             })
@@ -19,7 +19,7 @@ namespace GivingGardenBE.Endpoints
             .Produces<List<Organization>>(StatusCodes.Status200OK);
 
             // Get organization by id
-            routes.MapGet("/{id}", async (int id, IOrganizationServices organizationServices) =>
+            group.MapGet("/{id}", async (int id, IOrganizationServices organizationServices) =>
             {
                 var result = await organizationServices.GetOrganizationById(id);
                 return result is not null ? Results.Ok(result) : Results.NotFound();
@@ -30,7 +30,7 @@ namespace GivingGardenBE.Endpoints
             .Produces(StatusCodes.Status404NotFound);
 
             // Create organization
-            routes.MapPost("/", async (Organization organization, IOrganizationServices organizationServices) =>
+            group.MapPost("/", async (Organization organization, IOrganizationServices organizationServices) =>
             {
                 var createdOrg = await organizationServices.CreateOrganization(organization);
                 return createdOrg is not null ? Results.Created($"/organizations/{createdOrg.Id}", createdOrg) : Results.BadRequest();
@@ -41,7 +41,7 @@ namespace GivingGardenBE.Endpoints
             .Produces(StatusCodes.Status400BadRequest);
 
             // Update organization
-            routes.MapPut("/{id}", async (int id, Organization organization, IOrganizationServices organizationServices) =>
+           group.MapPut("/{id}", async (int id, Organization organization, IOrganizationServices organizationServices) =>
             {
                 var updatedOrg = await organizationServices.UpdateOrganization(id, organization);
                 return updatedOrg is not null ? Results.Ok(updatedOrg) : Results.NotFound();
@@ -52,7 +52,7 @@ namespace GivingGardenBE.Endpoints
             .Produces(StatusCodes.Status404NotFound);
 
             // Delete organization
-            routes.MapDelete("/{id}", async (int id, IOrganizationServices organizationServices) =>
+            group.MapDelete("/{id}", async (int id, IOrganizationServices organizationServices) =>
             {
                 var deletedOrg = await organizationServices.DeleteOrganization(id);
                 return deletedOrg is not null ? Results.Ok(deletedOrg) : Results.NotFound();
@@ -63,7 +63,7 @@ namespace GivingGardenBE.Endpoints
             .Produces(StatusCodes.Status404NotFound);
 
             // Get subscriptions by organization id
-            routes.MapGet("/subscriptions/{orgId}", async (int orgId, IOrganizationServices organizationServices) =>
+            group.MapGet("/subscriptions/{orgId}", async (int orgId, IOrganizationServices organizationServices) =>
             {
                 var subscriptions = await organizationServices.GetSubscriptionsByOrgId(orgId);
                 return subscriptions is not null ? Results.Ok(subscriptions) : Results.NotFound();
@@ -74,7 +74,7 @@ namespace GivingGardenBE.Endpoints
             .Produces(StatusCodes.Status404NotFound);
 
             // Get users by organization id
-            routes.MapGet("/users/{orgId}", async (int orgId, IOrganizationServices organizationServices) =>
+            group.MapGet("/users/{orgId}", async (int orgId, IOrganizationServices organizationServices) =>
             {
                 var users = await organizationServices.GetUsersByOrgId(orgId);
                 return users is not null ? Results.Ok(users) : Results.NotFound();
@@ -85,7 +85,7 @@ namespace GivingGardenBE.Endpoints
             .Produces(StatusCodes.Status404NotFound);
 
             // Get subscriptions by user id
-            routes.MapGet("/subscriptions/user/{userId}", async (int userId, IOrganizationServices organizationServices) =>
+            group.MapGet("/subscriptions/user/{userId}", async (int userId, IOrganizationServices organizationServices) =>
             {
                 var subscriptions = await organizationServices.GetSubscriptionsByUserId(userId);
                 return subscriptions is not null ? Results.Ok(subscriptions) : Results.NotFound();
@@ -96,7 +96,7 @@ namespace GivingGardenBE.Endpoints
             .Produces(StatusCodes.Status404NotFound);
 
             // Get organizations by user id
-            routes.MapGet("/user/{userId}", async (int userId, IOrganizationServices organizationServices) =>
+            group.MapGet("/user/{userId}", async (int userId, IOrganizationServices organizationServices) =>
             {
                 var organizations = await organizationServices.GetOrganizationsByUserId(userId);
                 return organizations is not null ? Results.Ok(organizations) : Results.NotFound();
