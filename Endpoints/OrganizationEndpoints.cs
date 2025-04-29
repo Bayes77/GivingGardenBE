@@ -74,7 +74,7 @@ namespace GivingGardenBE.Endpoints
             .Produces(StatusCodes.Status404NotFound);
 
             // Get users by organization id
-            group.MapGet("/users/{orgId}", async (int orgId, IOrganizationServices organizationServices) =>
+            /*group.MapGet("/users/{orgId}", async (int orgId, IOrganizationServices organizationServices) =>
             {
                 var users = await organizationServices.GetUsersByOrgId(orgId);
                 return users is not null ? Results.Ok(users) : Results.NotFound();
@@ -82,7 +82,7 @@ namespace GivingGardenBE.Endpoints
             .WithName("GetUsersByOrgId")
             .WithOpenApi()
             .Produces<List<User>>(StatusCodes.Status200OK)
-            .Produces(StatusCodes.Status404NotFound);
+            .Produces(StatusCodes.Status404NotFound);*/
 
             // Get subscriptions by user id
             group.MapGet("/subscriptions/user/{userId}", async (int userId, IOrganizationServices organizationServices) =>

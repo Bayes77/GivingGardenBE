@@ -5,14 +5,15 @@ namespace GivingGardenBE.Endpoints
 {
     public static class CategoriesEndpoints
     {
-        public static void MapCategoriesEndpoints(this IEndpointRouteBuilder routes)
+        public static void MapCategoriesEndpoints(this WebApplication app)
         {
-            routes.MapGet("/categories", async (ICategoriesServices categoriesServices) =>
+            app.MapGet("/categories", async (ICategoriesServices categories) =>
             {
-                var categories = await categoriesServices.GetAllCategories();
-                return Results.Ok(categories);
+                var catagories = await categories.GetAllCategories();
+                return Results.Ok(catagories);
             })
             .WithName("GetAllCategories")
+            .WithOpenApi()
             .Produces<List<Categories>>(StatusCodes.Status200OK)
             .Produces(StatusCodes.Status500InternalServerError);
         }

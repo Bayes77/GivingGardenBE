@@ -34,10 +34,10 @@ namespace GivingGardenBE.Services
         {
             return await _organizationRepository.GetSubscriptionsByOrgId(orgId);
         }
-        public async Task<List<User>> GetUsersByOrgId(int orgId)
-        {
-            return await _organizationRepository.GetUsersByOrgId(orgId);
-        }
+        /* public async Task<List<User>> GetUsersByOrgId(int orgId)
+         {
+             return await _organizationRepository.GetUsersByOrgId(orgId);
+         }*/
         public async Task<List<Subscription>> GetSubscriptionsByUserId(int userId)
         {
             return await _organizationRepository.GetSubscriptionsByUserId(userId);

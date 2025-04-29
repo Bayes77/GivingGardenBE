@@ -2,9 +2,9 @@
 
 namespace GivingGardenBE.Interfaces
 {
-    public interface ICategoriesServices
+    public interface ICategoriesRepository
     {
-     
         Task<List<Categories>> GetAllCategories();
+       
     }
 }

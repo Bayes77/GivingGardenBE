@@ -2,6 +2,7 @@
 using GivingGardenBE.Data;
 using GivingGardenBE.Models;
 using GivingGardenBE.Interfaces;
+using System.Linq;
 
 
 namespace GivingGardenBE.Repositories
@@ -48,15 +49,15 @@ namespace GivingGardenBE.Repositories
         {
             return await _context.Subscriptions.Where(s => s.OrganizationId == orgId).ToListAsync();
         }
-        public async Task<List<User>> GetUsersByOrgId(int orgId)
+        /*public async Task<List<User>> GetUsersByOrgId(int orgId)
         {
             var subscriptions = await GetSubscriptionsByOrgId(orgId);
-            var userIds = subscriptions.Select(s => s.UserId).Distinct();
-            return await _context.Users.Where(u => userIds.Contains(u.Id)).ToListAsync();
-        }
+            var userIds = subscriptions.Select(s => s.UserId).Distinct().ToList(); // Ensure userIds is a list of integers
+            return await _context.Users.Where(u => userIds.Contains(u.Id)).ToListAsync(); // Ensure u.Id is an integer
+        }*/
         public async Task<List<Subscription>> GetSubscriptionsByUserId(int userId)
         {
-            return await _context.Subscriptions.Where(s => s.UserId == userId).ToListAsync();
+            return await _context.Subscriptions.Where(s => s.UserId == userId.ToString()).ToListAsync(); // Convert userId to string
         }
         public async Task<List<Organization>> GetOrganizationsByUserId(int userId)
         {

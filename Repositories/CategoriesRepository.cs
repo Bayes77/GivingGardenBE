@@ -6,18 +6,18 @@ using GivingGardenBE.Data;
 
 namespace GivingGardenBE.Repositories
 {
-    public class CatagoriesRepository : ICatagoriesRepository
+    public class CategoriesRepository : ICategoriesRepository
     {
         private readonly GivingGardenBEDbContext _context;
-        public CatagoriesRepository(GivingGardenBEDbContext context)
+        public CategoriesRepository(GivingGardenBEDbContext context)
         {
             _context = context;
         }
-        public async Task<List<Categories>> GetAllCatagories()
+        public async Task<List<Categories>> GetAllCategories()
         {
             return await _context.Categories.ToListAsync();
         }
     }
-    
-    
+
+
 }

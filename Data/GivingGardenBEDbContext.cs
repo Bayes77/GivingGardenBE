@@ -15,14 +15,13 @@ namespace GivingGardenBE.Data
         public DbSet<PaymentTypes> PaymentTypes { get; set; }
         public DbSet<Categories> Categories { get; set; }
 
-
-        public GivingGardenBEDbContext(DbContextOptions<GivingGardenBEDbContext> options)
-            : base(options)
+        public  GivingGardenBEDbContext(DbContextOptions<GivingGardenBEDbContext> options) : base(options)
         {
         }
 
 
-        protected override void OnModelCreating(ModelBuilder modelBuilder)
+
+            protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<User>().HasData(UserData.Users);
             modelBuilder.Entity<Subscription>().HasData(SubscriptionData.Subscriptions);

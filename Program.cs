@@ -19,6 +19,8 @@ builder.Services.Configure<JsonOptions>(options =>
     options.SerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles;
 });
 
+
+
 // Add services to the container.
 builder.Services.AddScoped<IOrganizationServices, OrganizationServices>();
 builder.Services.AddScoped<IOrganizationRepositroy, OrganizationRepository>();
@@ -31,8 +33,8 @@ builder.Services.AddScoped<IPaymentTypeServices, PaymentTypesRepository>();
 builder.Services.AddScoped<PaymentTypesRepository, PaymentTypesRepository>();
 builder.Services.AddScoped<ISubscriptionRepository, SubscriptionRepository>();
 builder.Services.AddScoped<ISubscriptionServices, SubscriptionServices>();
-builder.Services.AddScoped<ICatagoriesRepository, CatagoriesRepository>();
-builder.Services.AddScoped<ICategoriesServices, CatagoriesServices>();
+builder.Services.AddScoped<ICategoriesRepository, CategoriesRepository>();
+builder.Services.AddScoped<ICategoriesServices, CategoriesServices>();
 
 // Add services to the container.
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle

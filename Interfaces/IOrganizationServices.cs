@@ -10,7 +10,7 @@ namespace GivingGardenBE.Interfaces
         Task<Organization?> UpdateOrganization(int id, Organization organization);
         Task<Organization> DeleteOrganization(int id);
        Task<List<Subscription>> GetSubscriptionsByOrgId(int orgId);
-        Task<List<User>> GetUsersByOrgId(int orgId);
+        //Task<List<User>> GetUsersByOrgId(int orgId);
         Task<List<Subscription>> GetSubscriptionsByUserId(int userId);
         Task<List<Organization>> GetOrganizationsByUserId(int userId);
     }

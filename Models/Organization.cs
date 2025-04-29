@@ -17,10 +17,10 @@
         public DateTime Created_at { get; set; } 
 
 
-        public List<User>? Users { get; set; } = new List<User>();
-        public List<Subscription>? Subscriptions { get; set; } = new List<Subscription>();
-      public List<Categories>? Categories { get; set; } = new List<Categories>();
-        public List<PaymentTypes>? PaymentTypes { get; set; } = new List<PaymentTypes>();
+        public List<User>? Users { get; set; } 
+        public List<Subscription>? Subscriptions { get; set; } 
+      public List<Categories>? Categories { get; set; } 
+        public List<PaymentTypes>? PaymentTypes { get; set; } 
         
      
      
