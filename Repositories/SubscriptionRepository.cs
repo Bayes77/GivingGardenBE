@@ -17,7 +17,7 @@ namespace GivingGardenBE.Repositories
         public async Task<List<Subscription>> GetSubscriptionsByUserId(int userId)
         {
             return await _context.Subscriptions
-                .Where(s => s.UserId == userId)
+                .Where(s => int.Parse(s.UserId) == userId) 
                 .ToListAsync();
         }
 
