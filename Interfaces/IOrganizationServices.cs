@@ -5,6 +5,7 @@ namespace GivingGardenBE.Interfaces
     public interface IOrganizationServices
     {
         Task<List<Organization>> GetAllOrganizations();
+        Task<List<Organization?>> GetOrganizationById(int id);
         Task<Organization?> CreateOrganization(Organization organization);
         Task<Organization?> UpdateOrganization(int id, Organization organization);
         Task<Organization> DeleteOrganization(int id);

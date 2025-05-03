@@ -10,10 +10,6 @@ namespace GivingGardenBE.Endpoints
         {
             var group = routes.MapGroup("/api/subscription").WithTags(nameof(Subscription));
 
-            // Get subscriptions by User
-
-
-
             // Create subscription
             group.MapPost("/", async (Subscription sub, ISubscriptionServices service) =>
             {

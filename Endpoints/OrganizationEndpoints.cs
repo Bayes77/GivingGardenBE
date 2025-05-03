@@ -18,6 +18,17 @@ namespace GivingGardenBE.Endpoints
             .WithOpenApi()
             .Produces<List<Organization>>(StatusCodes.Status200OK);
 
+            // Get organization by id
+            group.MapGet("/{id}", async (int id, IOrganizationServices organizationServices) =>
+            {
+                var result = await organizationServices.GetOrganizationById(id);
+                return result is not null ? Results.Ok(result) : Results.NotFound();
+            })
+            .WithName("GetOrganizationById")
+            .WithOpenApi()
+            .Produces<Organization>(StatusCodes.Status200OK)
+            .Produces(StatusCodes.Status404NotFound);
+
             // Create organization
             group.MapPost("/", async (Organization organization, IOrganizationServices organizationServices) =>
             {
@@ -62,16 +73,19 @@ namespace GivingGardenBE.Endpoints
             .Produces<List<User>>(StatusCodes.Status200OK)
             .Produces(StatusCodes.Status404NotFound);*/
 
-            group.MapGet("/subscriptions/{userId}", async (string userId, IOrganizationServices service) =>
+            // Get subscriptions by user id
+            group.MapGet("/subscriptions/user/{userId}", async (string userId, IOrganizationServices organizationServices) =>
             {
-                var subs = await service.GetSubscriptionsByUserId(userId);
-                return Results.Ok(subs);
+                var subscriptions = await organizationServices.GetSubscriptionsByUserId(userId);
+                return subscriptions is not null ? Results.Ok(subscriptions) : Results.NotFound();
             })
-            .WithName("GetSubscriptionsByUId")
+            .WithName("GetSubscriptionsByUserId")
             .WithOpenApi()
-            .Produces<List<Subscription>>(StatusCodes.Status200OK);
+            .Produces<List<Subscription>>(StatusCodes.Status200OK)
+            .Produces(StatusCodes.Status404NotFound);
+
             // Get organizations by user id
-            group.MapGet("/{userId}", async (string userId, IOrganizationServices organizationServices) =>
+            group.MapGet("/user/{userId}", async (string userId, IOrganizationServices organizationServices) =>
             {
                 var organizations = await organizationServices.GetOrganizationsByUserId(userId);
                 return organizations is not null ? Results.Ok(organizations) : Results.NotFound();
