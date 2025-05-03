@@ -1,5 +1,6 @@
 ﻿using GivingGardenBE.Interfaces;
 using GivingGardenBE.Models;
+using GivingGardenBE.Repositories;
 
 namespace GivingGardenBE.Services
 {
@@ -13,10 +14,6 @@ namespace GivingGardenBE.Services
         public async Task<List<Organization>> GetAllOrganizations()
         {
             return await _organizationRepository.GetAllOrganizations();
-        }
-        public async Task<List<Organization?>> GetOrganizationById(int id)
-        {
-            return await _organizationRepository.GetOrganizationById(id);
         }
         public async Task<Organization?> CreateOrganization(Organization organization)
         {
@@ -38,11 +35,11 @@ namespace GivingGardenBE.Services
          {
              return await _organizationRepository.GetUsersByOrgId(orgId);
          }*/
-        public async Task<List<Subscription>> GetSubscriptionsByUserId(int userId)
+        public async Task<List<Subscription>> GetSubscriptionsByUserId(string userId)
         {
             return await _organizationRepository.GetSubscriptionsByUserId(userId);
         }
-        public async Task<List<Organization>> GetOrganizationsByUserId(int userId)
+        public async Task<List<Organization>> GetOrganizationsByUserId(string userId)
         {
             return await _organizationRepository.GetOrganizationsByUserId(userId);
         }

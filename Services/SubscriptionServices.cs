@@ -12,14 +12,9 @@ namespace GivingGardenBE.Services
             _subscriptionRepository = subscriptionRepository;
         }
 
-        public async Task<List<Subscription>> GetSubscriptionsByUserId(int userId)
+        public async Task<List<Subscription>> GetSubscriptionsByUserId(string userId)
         {
             return await _subscriptionRepository.GetSubscriptionsByUserId(userId);
-        }
-
-        public async Task<Subscription?> GetSubscriptionById(int id)
-        {
-            return await _subscriptionRepository.GetSubscriptionById(id);
         }
 
         public async Task<Subscription?> CreateSubscription(Subscription subscription)

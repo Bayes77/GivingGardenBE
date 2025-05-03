@@ -12,7 +12,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace GivingGardenBE.Migrations
 {
     [DbContext(typeof(GivingGardenBEDbContext))]
-    [Migration("20250429233857_InitialCreate")]
+    [Migration("20250503173734_InitialCreate")]
     partial class InitialCreate
     {
         /// <inheritdoc />
@@ -34,14 +34,10 @@ namespace GivingGardenBE.Migrations
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
 
                     b.Property<string>("CategoryName")
+                        .IsRequired()
                         .HasColumnType("text");
 
-                    b.Property<int?>("OrganizationId")
-                        .HasColumnType("integer");
-
                     b.HasKey("Id");
-
-                    b.HasIndex("OrganizationId");
 
                     b.ToTable("Categories");
 
@@ -82,10 +78,13 @@ namespace GivingGardenBE.Migrations
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
 
                     b.Property<string>("CategoryName")
+                        .IsRequired()
                         .HasColumnType("text");
 
-                    b.Property<DateTime>("Created_at")
-                        .HasColumnType("timestamp without time zone");
+                    b.Property<DateTime?>("Created_at")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("timestamp without time zone")
+                        .HasDefaultValueSql("CURRENT_TIMESTAMP");
 
                     b.Property<string>("Description")
                         .HasColumnType("text");
@@ -110,6 +109,8 @@ namespace GivingGardenBE.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("UserId");
+
                     b.ToTable("Organizations");
 
                     b.HasData(
@@ -117,143 +118,143 @@ namespace GivingGardenBE.Migrations
                         {
                             Id = 101,
                             CategoryName = "Community Development",
-                            Created_at = new DateTime(2025, 4, 29, 18, 38, 55, 712, DateTimeKind.Local).AddTicks(1266),
+                            Created_at = new DateTime(2025, 5, 3, 12, 37, 34, 497, DateTimeKind.Local).AddTicks(577),
                             Description = "Brings smiles and solar-powered radios to remote villages one playlist at a time.",
                             Email = "DWBtest.gmail.com",
                             Image = "https://images.openai.com/thumbnails/39a8828844b53eb51453e3cd9e306ec8.png",
                             Mission = "Cultivating hope and sustainable futures through global community development, education, and agricultural empowerment.",
                             Title = "HopeHarvest International",
-                            UserId = "one",
+                            UserId = "XdynYdPxtmTU4VghjX2paBdQC9b2",
                             Website = "HarvestInter@test.com"
                         },
                         new
                         {
                             Id = 102,
                             CategoryName = "Education",
-                            Created_at = new DateTime(2025, 4, 29, 18, 38, 55, 712, DateTimeKind.Local).AddTicks(1951),
+                            Created_at = new DateTime(2025, 5, 3, 12, 37, 34, 497, DateTimeKind.Local).AddTicks(762),
                             Description = "Delivers enchanted storybooks to children in magical lands (and a few underfunded libraries).",
                             Email = "BFBtest.gmail.com",
                             Image = "https://m.media-amazon.com/images/I/81ukSP5PrJL._AC_UF1000%2C1000_QL80_.jpg",
                             Mission = "Expanding minds and opportunities by delivering books and educational resources to underserved communities around the world.",
                             Title = "Books for Beyond",
-                            UserId = "two",
+                            UserId = "XdynYdPxtmTU4VghjX2paBdQC9b2",
                             Website = "Beyond@test.com"
                         },
                         new
                         {
                             Id = 103,
                             CategoryName = "Humanitarian Aid",
-                            Created_at = new DateTime(2025, 4, 29, 18, 38, 55, 712, DateTimeKind.Local).AddTicks(1963),
+                            Created_at = new DateTime(2025, 5, 3, 12, 37, 34, 497, DateTimeKind.Local).AddTicks(767),
                             Description = "Knits invisible scarves for people experiencing metaphorical winters.",
                             Email = "WOWtest.gmail.com",
                             Image = "https://www.shutterstock.com/image-photo/flock-white-pelicans-soars-gracefully-over-2603037941",
                             Mission = "To deliver warmth, comfort, and hope to vulnerable individuals through seasonal support programs, emergency aid, and community-driven outreach initiatives.",
                             Title = "Wings of Warmth",
-                            UserId = "three",
+                            UserId = "XdynYdPxtmTU4VghjX2paBdQC9b2",
                             Website = "WarmWing@test.com"
                         },
                         new
                         {
                             Id = 104,
-                            CategoryName = "Envirement",
-                            Created_at = new DateTime(2025, 4, 29, 18, 38, 55, 712, DateTimeKind.Local).AddTicks(1967),
+                            CategoryName = "Environment",
+                            Created_at = new DateTime(2025, 5, 3, 12, 37, 34, 497, DateTimeKind.Local).AddTicks(769),
                             Description = "Sends love letters and biodegradable glitter to lonely sea creatures.",
                             Email = "OHPtest.gmail.com",
                             Image = "https://i0.wp.com/oceanblueproject.org/wp-content/uploads/2023/05/happy-world-ocean-day-activities-ocean-blue-project-cleanup.webp?fit=2048%2C1367&ssl=1",
                             Mission = "To protect and nurture our oceans through grassroots conservation efforts, education, and community engagement, inspiring a global embrace of marine stewardship.",
                             Title = "Ocean Hug Project",
-                            UserId = "four",
+                            UserId = "XdynYdPxtmTU4VghjX2paBdQC9b2",
                             Website = "OHP@test.com"
                         },
                         new
                         {
                             Id = 105,
                             CategoryName = "Animal Welfare",
-                            Created_at = new DateTime(2025, 4, 29, 18, 38, 55, 712, DateTimeKind.Local).AddTicks(1970),
+                            Created_at = new DateTime(2025, 5, 3, 12, 37, 34, 497, DateTimeKind.Local).AddTicks(772),
                             Description = "Helps vertically challenged animals reach their dreams (and the top shelf).",
                             Email = "TGLFtest.gmail.com",
                             Image = "https://media.istockphoto.com/id/543346734/photo/giraffe-in-the-library.jpg?s=2048x2048&w=is&k=20&c=PgjqCSR3ad0uzcPHpnR9ji6oAmuTJFAHhp0JDL8rpas=",
                             Mission = "To elevate opportunities for conservation, education, and leadership through projects that help communities—and endangered giraffes—rise to new heights.",
                             Title = "The Giraffe Ladder Fund",
-                            UserId = "five",
+                            UserId = "XdynYdPxtmTU4VghjX2paBdQC9b2",
                             Website = "GLF@test.com"
                         },
                         new
                         {
                             Id = 106,
                             CategoryName = "Humanitarian Aid",
-                            Created_at = new DateTime(2025, 4, 29, 18, 38, 55, 712, DateTimeKind.Local).AddTicks(2001),
+                            Created_at = new DateTime(2025, 5, 3, 12, 37, 34, 497, DateTimeKind.Local).AddTicks(777),
                             Description = "Helps friendless goobers get all the companions they need.",
                             Email = "goobers@example.com",
                             Image = "https://i1.sndcdn.com/avatars-000127116014-hqzcna-t240x240.jpg",
                             Mission = "Bring all goobers together",
                             Title = "Visiting Goobers",
-                            UserId = "seven",
+                            UserId = "9wNJQC9hfrMhjpdOUPD1wxjqLjE2",
                             Website = "Goob@test.com"
                         },
                         new
                         {
                             Id = 107,
                             CategoryName = "Humanitarian Aid",
-                            Created_at = new DateTime(2025, 4, 29, 18, 38, 55, 712, DateTimeKind.Local).AddTicks(2004),
+                            Created_at = new DateTime(2025, 5, 3, 12, 37, 34, 497, DateTimeKind.Local).AddTicks(779),
                             Description = "Red shorts initiative, everyone deserves a pair. Polka dots are also allowed.",
                             Email = "theRedShorts@example.com",
                             Image = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQAyHT6BTbA-AKsM_-FIwE382ec-uIYKOE-Vg&s",
                             Mission = "Shorts for days",
                             Title = "American Red Shorts",
-                            UserId = "four",
+                            UserId = "9wNJQC9hfrMhjpdOUPD1wxjqLjE2",
                             Website = "shorts@test.com"
                         },
                         new
                         {
                             Id = 108,
                             CategoryName = "Humanitarian Aid",
-                            Created_at = new DateTime(2025, 4, 29, 18, 38, 55, 712, DateTimeKind.Local).AddTicks(2007),
+                            Created_at = new DateTime(2025, 5, 3, 12, 37, 34, 497, DateTimeKind.Local).AddTicks(781),
                             Description = "Help the salvation army by adding to my bank account.",
                             Email = "johnelmo@example.com",
                             Image = "https://st2.depositphotos.com/3758943/6040/i/450/depositphotos_60400957-stock-photo-the-man-in-the-office.jpg",
                             Mission = "We shall support the cause",
                             Title = "The Salvation Army’s biggest supporter",
-                            UserId = "six",
+                            UserId = "9wNJQC9hfrMhjpdOUPD1wxjqLjE2",
                             Website = "Broc@test.com"
                         },
                         new
                         {
                             Id = 109,
                             CategoryName = "Education",
-                            Created_at = new DateTime(2025, 4, 29, 18, 38, 55, 712, DateTimeKind.Local).AddTicks(2010),
+                            Created_at = new DateTime(2025, 5, 3, 12, 37, 34, 497, DateTimeKind.Local).AddTicks(783),
                             Description = "One of the orgs yeah yeah",
                             Email = "brocbuhler@gmail.com",
                             Image = "https://i.ytimg.com/vi/k9KAc23W48s/sddefault.jpg",
                             Mission = "Brocs Retirment",
                             Title = "Broc's Bank Account",
-                            UserId = "three",
+                            UserId = "9wNJQC9hfrMhjpdOUPD1wxjqLjE2",
                             Website = "Broc@test.com"
                         },
                         new
                         {
                             Id = 110,
                             CategoryName = "Animal Welfare",
-                            Created_at = new DateTime(2025, 4, 29, 18, 38, 55, 712, DateTimeKind.Local).AddTicks(2015),
+                            Created_at = new DateTime(2025, 5, 3, 12, 37, 34, 497, DateTimeKind.Local).AddTicks(786),
                             Description = "Give me money for cat NOW.",
                             Email = "givecat@gmail.com",
                             Image = "https://media.npr.org/assets/img/2023/12/12/gettyimages-1054147940-627235e01fb63b4644bec84204c259f0a343e35b.jpg",
                             Mission = "Rescue all felines",
                             Title = "Cat",
-                            UserId = "one",
+                            UserId = "9wNJQC9hfrMhjpdOUPD1wxjqLjE2",
                             Website = "cat@test.com"
                         },
                         new
                         {
                             Id = 111,
-                            CategoryName = "Envirement",
-                            Created_at = new DateTime(2025, 4, 29, 18, 38, 55, 712, DateTimeKind.Local).AddTicks(2018),
+                            CategoryName = "Environment",
+                            Created_at = new DateTime(2025, 5, 3, 12, 37, 34, 497, DateTimeKind.Local).AddTicks(789),
                             Description = "We are like super dark and edgy bro look at our spiky ghost king crowns and our exploding orc birth sacs.",
                             Email = "cuteSaronPIcs@mordor.com",
                             Image = "https://i.redd.it/the-two-towers-vs-return-of-the-king-mordor-v0-b352b0r01tyb1.jpg?width=3816&format=pjpg&auto=webp&s=c3f5494c21e1ccfc774b3bb8649fcfc8a2670ea3",
                             Mission = "Bring about the rise of mordor",
                             Title = "The Dark Organization",
-                            UserId = "five",
+                            UserId = "9wNJQC9hfrMhjpdOUPD1wxjqLjE2",
                             Website = "mordor@test.com"
                         });
                 });
@@ -266,20 +267,11 @@ namespace GivingGardenBE.Migrations
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
 
-                    b.Property<int?>("OrganizationId")
-                        .HasColumnType("integer");
-
                     b.Property<string>("PaymentTypeName")
+                        .IsRequired()
                         .HasColumnType("text");
 
-                    b.Property<int?>("SubscriptionId")
-                        .HasColumnType("integer");
-
                     b.HasKey("Id");
-
-                    b.HasIndex("OrganizationId");
-
-                    b.HasIndex("SubscriptionId");
 
                     b.ToTable("PaymentTypes");
 
@@ -319,7 +311,7 @@ namespace GivingGardenBE.Migrations
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
 
-                    b.Property<int>("OrganizationId")
+                    b.Property<int?>("OrganizationId")
                         .HasColumnType("integer");
 
                     b.Property<decimal>("PaymentAmount")
@@ -328,20 +320,17 @@ namespace GivingGardenBE.Migrations
                     b.Property<string>("PaymentType")
                         .HasColumnType("text");
 
-                    b.Property<DateTime>("Subscribed_at")
+                    b.Property<DateTime?>("Subscribed_at")
                         .HasColumnType("timestamp without time zone");
 
                     b.Property<string>("UserId")
                         .HasColumnType("text");
 
-                    b.Property<int?>("UserId1")
-                        .HasColumnType("integer");
-
                     b.HasKey("Id");
 
                     b.HasIndex("OrganizationId");
 
-                    b.HasIndex("UserId1");
+                    b.HasIndex("UserId");
 
                     b.ToTable("Subscriptions");
 
@@ -352,8 +341,8 @@ namespace GivingGardenBE.Migrations
                             OrganizationId = 108,
                             PaymentAmount = 10.00m,
                             PaymentType = "paypal",
-                            Subscribed_at = new DateTime(2025, 4, 29, 18, 38, 55, 697, DateTimeKind.Local).AddTicks(7633),
-                            UserId = "one"
+                            Subscribed_at = new DateTime(2025, 5, 3, 12, 37, 34, 494, DateTimeKind.Local).AddTicks(9160),
+                            UserId = "9wNJQC9hfrMhjpdOUPD1wxjqLjE2"
                         },
                         new
                         {
@@ -361,8 +350,8 @@ namespace GivingGardenBE.Migrations
                             OrganizationId = 102,
                             PaymentAmount = 10.00m,
                             PaymentType = "debit",
-                            Subscribed_at = new DateTime(2025, 4, 29, 18, 38, 55, 710, DateTimeKind.Local).AddTicks(9422),
-                            UserId = "two"
+                            Subscribed_at = new DateTime(2025, 5, 3, 12, 37, 34, 496, DateTimeKind.Local).AddTicks(4091),
+                            UserId = "9wNJQC9hfrMhjpdOUPD1wxjqLjE2"
                         },
                         new
                         {
@@ -370,8 +359,8 @@ namespace GivingGardenBE.Migrations
                             OrganizationId = 106,
                             PaymentAmount = 10.00m,
                             PaymentType = "mastercard",
-                            Subscribed_at = new DateTime(2025, 4, 29, 18, 38, 55, 710, DateTimeKind.Local).AddTicks(9461),
-                            UserId = "three"
+                            Subscribed_at = new DateTime(2025, 5, 3, 12, 37, 34, 496, DateTimeKind.Local).AddTicks(4111),
+                            UserId = "9wNJQC9hfrMhjpdOUPD1wxjqLjE2"
                         },
                         new
                         {
@@ -379,8 +368,8 @@ namespace GivingGardenBE.Migrations
                             OrganizationId = 104,
                             PaymentAmount = 10.00m,
                             PaymentType = "cryptocurrency",
-                            Subscribed_at = new DateTime(2025, 4, 29, 18, 38, 55, 710, DateTimeKind.Local).AddTicks(9465),
-                            UserId = "four"
+                            Subscribed_at = new DateTime(2025, 5, 3, 12, 37, 34, 496, DateTimeKind.Local).AddTicks(4114),
+                            UserId = "XdynYdPxtmTU4VghjX2paBdQC9b2"
                         },
                         new
                         {
@@ -388,8 +377,8 @@ namespace GivingGardenBE.Migrations
                             OrganizationId = 105,
                             PaymentAmount = 10.00m,
                             PaymentType = "visa",
-                            Subscribed_at = new DateTime(2025, 4, 29, 18, 38, 55, 710, DateTimeKind.Local).AddTicks(9468),
-                            UserId = "five"
+                            Subscribed_at = new DateTime(2025, 5, 3, 12, 37, 34, 496, DateTimeKind.Local).AddTicks(4116),
+                            UserId = "XdynYdPxtmTU4VghjX2paBdQC9b2"
                         });
                 });
 
@@ -402,6 +391,10 @@ namespace GivingGardenBE.Migrations
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
 
                     b.Property<string>("Email")
+                        .HasColumnType("text");
+
+                    b.Property<string>("FirebaseUid")
+                        .IsRequired()
                         .HasColumnType("text");
 
                     b.Property<string>("Image")
@@ -419,6 +412,7 @@ namespace GivingGardenBE.Migrations
                         {
                             Id = 1,
                             Email = "CaseCunnTest@gmail.com",
+                            FirebaseUid = "9wNJQC9hfrMhjpdOUPD1wxjqLjE2",
                             Image = "https://ca.slack-edge.com/T03F2SDTJ-U078T3MSH0U-57f35b70c0e6-512",
                             Name = "Casey Cunningham"
                         },
@@ -426,6 +420,7 @@ namespace GivingGardenBE.Migrations
                         {
                             Id = 2,
                             Email = "NoAllenTest@gmail.com",
+                            FirebaseUid = "Pdi1E8scqodl78kPX57bcidHSzq2",
                             Image = "https://ca.slack-edge.com/T03F2SDTJ-U05MUF4KMNY-e42ee592a708-192",
                             Name = "Noah Allen"
                         },
@@ -433,6 +428,7 @@ namespace GivingGardenBE.Migrations
                         {
                             Id = 3,
                             Email = "MonesTest@gmail.com",
+                            FirebaseUid = "XdynYdPxtmTU4VghjX2paBdQC9b2",
                             Image = "https://ca.slack-edge.com/T03F2SDTJ-U078T3N3URJ-1d11def4d536-72",
                             Name = "Max Jones"
                         },
@@ -440,6 +436,7 @@ namespace GivingGardenBE.Migrations
                         {
                             Id = 4,
                             Email = "TormusTest@gmail.com",
+                            FirebaseUid = "AbCdefGhIJKlmnOPQRstUVwxYZ01",
                             Image = "https://ca.slack-edge.com/T03F2SDTJ-U078J0FDSES-82600e02198b-72",
                             Name = "Toren DeRamus"
                         },
@@ -447,6 +444,7 @@ namespace GivingGardenBE.Migrations
                         {
                             Id = 5,
                             Email = "BSuttleTest@gmail.com",
+                            FirebaseUid = "mNopQRstUVwxYZ0123ABCdefGhIJ",
                             Image = "https://ca.slack-edge.com/T03F2SDTJ-U078QJZUQ3U-8bc62e1cae81-512",
                             Name = "Biran Shuttles"
                         },
@@ -454,6 +452,7 @@ namespace GivingGardenBE.Migrations
                         {
                             Id = 6,
                             Email = "christopherpack17@gmail.com",
+                            FirebaseUid = "ZyxWVUTsrqponMLKJihgFEDCba98",
                             Image = "https://ca.slack-edge.com/T03F2SDTJ-U086UKR68LT-e9228b208df1-512",
                             Name = "Christopher Pack"
                         },
@@ -461,88 +460,49 @@ namespace GivingGardenBE.Migrations
                         {
                             Id = 7,
                             Email = "brocbuhler@gmail.com",
+                            FirebaseUid = "a1B2c3D4e5F6g7H8i9J0kLmNoPqR",
                             Image = "https://ca.slack-edge.com/T03F2SDTJ-U086UKR0JRZ-5292d6df3113-512",
                             Name = "Broc Buhler"
                         });
                 });
 
-            modelBuilder.Entity("OrganizationUser", b =>
+            modelBuilder.Entity("GivingGardenBE.Models.Organization", b =>
                 {
-                    b.Property<int>("OrganizationsId")
-                        .HasColumnType("integer");
+                    b.HasOne("GivingGardenBE.Models.User", "User")
+                        .WithMany("Organizations")
+                        .HasForeignKey("UserId")
+                        .HasPrincipalKey("FirebaseUid");
 
-                    b.Property<int>("UsersId")
-                        .HasColumnType("integer");
-
-                    b.HasKey("OrganizationsId", "UsersId");
-
-                    b.HasIndex("UsersId");
-
-                    b.ToTable("OrganizationUser");
-                });
-
-            modelBuilder.Entity("GivingGardenBE.Models.Categories", b =>
-                {
-                    b.HasOne("GivingGardenBE.Models.Organization", null)
-                        .WithMany("Categories")
-                        .HasForeignKey("OrganizationId");
-                });
-
-            modelBuilder.Entity("GivingGardenBE.Models.PaymentTypes", b =>
-                {
-                    b.HasOne("GivingGardenBE.Models.Organization", null)
-                        .WithMany("PaymentTypes")
-                        .HasForeignKey("OrganizationId");
-
-                    b.HasOne("GivingGardenBE.Models.Subscription", null)
-                        .WithMany("PaymentTypes")
-                        .HasForeignKey("SubscriptionId");
+                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("GivingGardenBE.Models.Subscription", b =>
                 {
-                    b.HasOne("GivingGardenBE.Models.Organization", null)
+                    b.HasOne("GivingGardenBE.Models.Organization", "Organization")
                         .WithMany("Subscriptions")
                         .HasForeignKey("OrganizationId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .OnDelete(DeleteBehavior.Cascade);
 
-                    b.HasOne("GivingGardenBE.Models.User", null)
+                    b.HasOne("GivingGardenBE.Models.User", "User")
                         .WithMany("Subscriptions")
-                        .HasForeignKey("UserId1");
-                });
+                        .HasForeignKey("UserId")
+                        .HasPrincipalKey("FirebaseUid")
+                        .OnDelete(DeleteBehavior.Cascade);
 
-            modelBuilder.Entity("OrganizationUser", b =>
-                {
-                    b.HasOne("GivingGardenBE.Models.Organization", null)
-                        .WithMany()
-                        .HasForeignKey("OrganizationsId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                    b.Navigation("Organization");
 
-                    b.HasOne("GivingGardenBE.Models.User", null)
-                        .WithMany()
-                        .HasForeignKey("UsersId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("GivingGardenBE.Models.Organization", b =>
                 {
-                    b.Navigation("Categories");
-
-                    b.Navigation("PaymentTypes");
-
                     b.Navigation("Subscriptions");
-                });
-
-            modelBuilder.Entity("GivingGardenBE.Models.Subscription", b =>
-                {
-                    b.Navigation("PaymentTypes");
                 });
 
             modelBuilder.Entity("GivingGardenBE.Models.User", b =>
                 {
+                    b.Navigation("Organizations");
+
                     b.Navigation("Subscriptions");
                 });
 #pragma warning restore 612, 618
