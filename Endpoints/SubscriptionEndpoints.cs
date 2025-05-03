@@ -10,27 +10,9 @@ namespace GivingGardenBE.Endpoints
         {
             var group = routes.MapGroup("/api/subscription").WithTags(nameof(Subscription));
 
-            // Get subscription by ID
-            group.MapGet("/{id}", async (int id, ISubscriptionServices service) =>
-            {
-                var sub = await service.GetSubscriptionById(id);
-                return sub is not null ? Results.Ok(sub) : Results.NotFound();
-            })
-            .WithName("GetSubscriptionById")
-            .WithOpenApi()
-            .Produces<Subscription>(StatusCodes.Status200OK)
-            .Produces(StatusCodes.Status404NotFound);
+            // Get subscriptions by User
 
-            // Get subscriptions by User IDdotnet watch run
 
-            group.MapGet("/{userId}", async (int userId, ISubscriptionServices service) =>
-            {
-                var subs = await service.GetSubscriptionsByUserId(userId);
-                return Results.Ok(subs);
-            })
-            .WithName("GetSubscriptionsByUId")
-            .WithOpenApi()
-            .Produces<List<Subscription>>(StatusCodes.Status200OK);
 
             // Create subscription
             group.MapPost("/", async (Subscription sub, ISubscriptionServices service) =>
@@ -65,6 +47,17 @@ namespace GivingGardenBE.Endpoints
             .WithOpenApi()
             .Produces<Subscription>(StatusCodes.Status200OK)
             .Produces(StatusCodes.Status400BadRequest)
+            .Produces(StatusCodes.Status404NotFound);
+
+            // Get subscriptions by organization id
+            group.MapGet("/{orgId}", async (int orgId, IOrganizationServices organizationServices) =>
+            {
+                var subscriptions = await organizationServices.GetSubscriptionsByOrgId(orgId);
+                return subscriptions is not null ? Results.Ok(subscriptions) : Results.NotFound();
+            })
+            .WithName("GetSubscriptionsByOrgId")
+            .WithOpenApi()
+            .Produces<List<Subscription>>(StatusCodes.Status200OK)
             .Produces(StatusCodes.Status404NotFound);
         }
     }

@@ -13,11 +13,11 @@ namespace GivingGardenBE.Repositories
         {
             _context = context;
         }
-
-        public async Task<List<Subscription>> GetSubscriptionsByUserId(int userId)
+        public async Task<List<Subscription>> GetSubscriptionsByUserId(string userId)
         {
             return await _context.Subscriptions
-                .Where(s => int.Parse(s.UserId) == userId) 
+                .Where(s => s.UserId == userId)
+                .Include(s => s.Organization)
                 .ToListAsync();
         }
 

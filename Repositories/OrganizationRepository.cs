@@ -55,16 +55,27 @@ namespace GivingGardenBE.Repositories
             var userIds = subscriptions.Select(s => s.UserId).Distinct().ToList(); // Ensure userIds is a list of integers
             return await _context.Users.Where(u => userIds.Contains(u.Id)).ToListAsync(); // Ensure u.Id is an integer
         }*/
-        public async Task<List<Subscription>> GetSubscriptionsByUserId(int userId)
+
+        public async Task<List<Subscription>> GetSubscriptionsByUserId(string userId)
         {
-            return await _context.Subscriptions.Where(s => s.UserId == userId.ToString()).ToListAsync(); // Convert userId to string
+            return await _context.Subscriptions
+                .Where(s => s.UserId == userId)
+                .Include(s => s.Organization)
+                .ToListAsync();
         }
-        public async Task<List<Organization>> GetOrganizationsByUserId(int userId)
+        public async Task<List<Organization>> GetOrganizationsByUserId(string userId)
         {
-            var subscriptions = await GetSubscriptionsByUserId(userId);
-            var orgIds = subscriptions.Select(s => s.OrganizationId).Distinct();
-            return await _context.Organizations.Where(o => orgIds.Contains(o.Id)).ToListAsync();
+            var subscriptions = await GetSubscriptionsByUserId(userId); // now passing string UID
+            var orgIds = subscriptions
+                .Where(s => s.OrganizationId.HasValue)
+                .Select(s => s.OrganizationId.Value)
+                .Distinct();
+
+            return await _context.Organizations
+                .Where(o => orgIds.Contains(o.Id))
+                .ToListAsync();
         }
+
     }
 }
 
