@@ -65,14 +65,8 @@ namespace GivingGardenBE.Repositories
         }
         public async Task<List<Organization>> GetOrganizationsByUserId(string userId)
         {
-            var subscriptions = await GetSubscriptionsByUserId(userId); // now passing string UID
-            var orgIds = subscriptions
-                .Where(s => s.OrganizationId.HasValue)
-                .Select(s => s.OrganizationId.Value)
-                .Distinct();
-
             return await _context.Organizations
-                .Where(o => orgIds.Contains(o.Id))
+                .Where(o => o.UserId == userId)
                 .ToListAsync();
         }
 
