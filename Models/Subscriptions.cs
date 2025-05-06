@@ -9,6 +9,7 @@
         public Organization Organization { get; set; }
         public DateTime? Subscribed_at { get; set; }
         public string? PaymentType { get; set; } 
+        public string? PayFrequency { get; set; }
         public decimal PaymentAmount { get; set; }
     }
 }
