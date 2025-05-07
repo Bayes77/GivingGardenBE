@@ -94,7 +94,7 @@ dotnet watch run
 <h2 id="routes">📍 API Endpoints</h2>
 
 Here you can list the main routes of your API, and what are their expected request bodies. For complete API calls and documentation:
-[Postman documentation](https://m11111-1406.postman.co/workspace/My-Workspace~6ab94679-970e-47be-8f5f-27b01e48e7bc/request/36650801-59c345e1-af89-40ef-9d85-785d43f4d6c8?action=share&creator=36650801&ctx=documentation)
+[Postman documentation]([https://m11111-1406.postman.co/workspace/My-Workspace~6ab94679-970e-47be-8f5f-27b01e48e7bc/request/36650801-59c345e1-af89-40ef-9d85-785d43f4d6c8?action=share&creator=36650801&ctx=documentation](https://documenter.getpostman.com/view/36650801/2sB2j7d9eq)
 ​
 | route               | description                                          
 |----------------------|-----------------------------------------------------
