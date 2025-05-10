@@ -8,6 +8,8 @@ namespace GivingGardenBE.Interfaces
         Task<Subscription?> CreateSubscription(Subscription subscription);
         Task<Subscription?> UpdateSubscription(int id, Subscription subscription);
         Task<Subscription?> DeleteSubscription(int id);
+        Task<Subscription?> GetSubscriptionById(int id);
+
     }
 }
 

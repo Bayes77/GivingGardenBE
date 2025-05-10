@@ -55,6 +55,17 @@ namespace GivingGardenBE.Endpoints
             .WithOpenApi()
             .Produces<List<Subscription>>(StatusCodes.Status200OK)
             .Produces(StatusCodes.Status404NotFound);
+
+            // Get subscriptions by subscription id
+            group.MapGet("/{id}", async (int id, ISubscriptionServices subscriptionServices) =>
+            {
+                var subscriptions = await subscriptionServices.GetSubscriptionById(id);
+                return subscriptions is not null ? Results.Ok(subscriptions) : Results.NotFound();
+            })
+            .WithName("GetSubscriptionById")
+            .WithOpenApi()
+            .Produces<Subscription>(StatusCodes.Status200OK)
+            .Produces(StatusCodes.Status404NotFound);
         }
     }
    
