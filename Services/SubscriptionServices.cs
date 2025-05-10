@@ -31,6 +31,10 @@ namespace GivingGardenBE.Services
         {
             return await _subscriptionRepository.UpdateSubscription(id,subscription);
         }
+        public async Task<Subscription?> GetSubscriptionById(int id)
+        {
+            return await _subscriptionRepository.GetSubscriptionById(id);
+        }
     }
 }
 

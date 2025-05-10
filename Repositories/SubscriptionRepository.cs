@@ -48,6 +48,7 @@ namespace GivingGardenBE.Repositories
             var existingSubscription = await _context.Subscriptions.FindAsync(subscription.Id);
             if (existingSubscription == null) return null;
             existingSubscription.UserId = subscription.UserId;
+            existingSubscription.Id = subscription.Id;
             existingSubscription.OrganizationId = subscription.OrganizationId;
             existingSubscription.Subscribed_at = subscription.Subscribed_at;
             existingSubscription.PaymentType = subscription.PaymentType;
