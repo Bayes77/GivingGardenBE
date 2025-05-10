@@ -46,7 +46,7 @@ namespace GivingGardenBE.Endpoints
             .Produces(StatusCodes.Status404NotFound);
 
             // Get subscriptions by organization id
-            group.MapGet("/{orgId}", async (int orgId, IOrganizationServices organizationServices) =>
+            group.MapGet("/org/{orgId}", async (int orgId, IOrganizationServices organizationServices) =>
             {
                 var subscriptions = await organizationServices.GetSubscriptionsByOrgId(orgId);
                 return subscriptions is not null ? Results.Ok(subscriptions) : Results.NotFound();
